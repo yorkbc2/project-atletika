@@ -1,0 +1,117 @@
+@mixin form-style {
+    background-color: $formBgColor;
+    padding: 25px;
+    @include box-shadow($shadow);
+}
+
+@mixin form-field-style {
+    width: 100%;
+    border: $formFieldBorderWidth solid $formFieldBorderColor;
+    padding: $formFieldPadding;
+    background-color: $formFieldBackgroundColor;
+    color: $formFieldTextColor;
+    font-size: $formFieldTextSize;
+    @include border-radius($formFieldBorderRadius);
+}
+
+%form-field-style {
+    @include form-field-style();
+}
+
+form {
+    fieldset {
+        @include form-style;
+
+        label {
+            font-weight: 800;
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 20px;
+            @extend %form-field-style;
+        }
+
+        [type="submit"] {
+            @include button-style;
+            margin-bottom: 0;
+        }
+
+        textarea {
+            width: 100%;
+            margin-bottom: 30px;
+            @extend %form-field-style;
+        }
+    }
+}
+
+//Search form style
+.form-inline {
+    margin: 0 auto;
+    max-width: 300px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    input {
+        width: calc(100% - 40px);
+        @extend %form-field-style;
+
+        &:focus {
+            border: 1px solid $themeColorTwo;
+        }
+    }
+}
+
+//Search form style end
+
+//Comment form on single post page
+#commentform {
+    @include form-style;
+
+    .form-group {
+        label {
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 10px;
+            @extend %form-field-style;
+        }
+
+        textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            @extend %form-field-style;
+        }
+    }
+}
+
+//Comment form  end
+
+[type='text'],
+[type='password'],
+[type='email'],
+[type='search'],
+[type='tel'],
+[type='url'],
+[type='number'],
+[type='range'],
+[type='month'],
+[type='week'],
+[type='date'],
+[type='datetime-local'],
+[type='time'],
+textarea,
+select {
+    @extend %form-field-style;
+}
+
+.is-mobile {
+    input,
+    select {
+        @include appearance(none);
+    }
+}

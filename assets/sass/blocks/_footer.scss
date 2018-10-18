@@ -1,0 +1,29 @@
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background: $themeColorTwo;
+}
+  
+.pre-footer {
+    padding: 20px 0;
+    background-color: $themeColorTwo;
+}
+
+.copyright {
+    padding: 14px 0;
+    background-color: $themeColorTwo;
+    text-align: center;
+    color: #fff;
+
+    a {
+        color: #fff;
+        text-decoration: underline;
+ 
+        &:hover {
+            color: $footerLinkColorActive;
+        }
+    }
+}

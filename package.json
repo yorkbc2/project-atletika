@@ -1,0 +1,71 @@
+{
+  "name": "fk-template",
+  "version": "1.0.0",
+  "description": "Workpieces code and structure that I use in every project",
+  "main": "gulpfile.babel.js",
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "browser-sync": "^2.24.7",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-clean-css": "^3.10.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-svgmin": "^2.1.0",
+    "gulp-svgstore": "^7.0.0",
+    "gulp-uglify": "^3.0.1",
+    "gulp-zip": "^4.2.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "scripts": {
+    "start": "yarn install --modules-folder ./../node_modules",
+    "sass": "node ./node_modules/gulp/bin/gulp.js sass",
+    "watch": "node ./node_modules/gulp/bin/gulp.js watch",
+    "react": "webpack --mode development --watch",
+    "react:build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kudinovfedor/fk-template.git"
+  },
+  "keywords": [
+    "HTML5",
+    "CSS3",
+    "Sass(Scss)",
+    "SMACSS",
+    "Node",
+    "npm",
+    "yarn",
+    "Gulp"
+  ],
+  "author": "Kudinov Fedor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kudinovfedor/fk-template/issues"
+  },
+  "homepage": "https://github.com/kudinovfedor/fk-template#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "rc-slider": "^8.6.3",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0"
+  }
+}

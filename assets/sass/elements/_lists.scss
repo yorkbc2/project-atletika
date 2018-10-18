@@ -1,0 +1,25 @@
+ol {
+    padding-left: 20px;
+}
+
+ul.social-list {
+	margin: 0;
+	padding: 0;
+
+	display: block;
+
+	li {
+		list-style: none;
+		display: inline-block;
+		margin-right: 5px;	
+
+		a {
+			font-size: 18px;
+			text-decoration: none;
+
+			i {
+				color: $themeColorTwo;
+			}
+		}
+	}
+}

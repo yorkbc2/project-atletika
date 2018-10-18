@@ -1,0 +1,12 @@
+.fa {
+    color: $iconColor;
+    @extend %smooth_animation;
+
+    &:hover {
+        color: $iconColorActive;
+    }
+}
+
+.fa.reversed-color {
+    color: $iconColorReversed
+}
