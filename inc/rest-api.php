@@ -149,9 +149,17 @@
 				}
 			}
 			foreach ($result['filters'] as $key=>$filter) {
-				usort($result['filters'][$key]['items'], function ($a, $b) {
-					return strcmp(str_replace(",", "", $a["value"]), str_replace(",", "", $b["value"]));
+				$items = $result['filters'][$key]['items'];
+				usort($items, function($a, $b) {
+					$_a = floatval(str_replace(',', '.', strtok($a['value'], '-')));
+					$_b = floatval(str_replace(',', '.', strtok($b['value'], '-')));
+					if ($_a == 0 && $_b == 0)
+					{
+						return strcmp($a['value'], $b['value']);
+					}
+				  return $_a > $_b? 1: 0;
 				});
+				$result['filters'][$key]['items'] = $items;
 			}
 			return $result;
 		}
