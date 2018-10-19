@@ -12,7 +12,7 @@
 		$rowCount = 0;
 		foreach ($categories as $cat)
 		{
-			if ($cat->parent != 0):
+			if ($cat->slug !== "uncategorized"):
 				$thm_id = get_woocommerce_term_meta( $cat->term_id, 'thumbnail_id', true );
 				$thm = wp_get_attachment_url($thm_id);
 				

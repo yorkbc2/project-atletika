@@ -49,8 +49,9 @@
                                     <ul class="phone">
                                         <?php
                                         $phones = get_phones();
+                                        $sizeof_phones = sizeof($phones);
                                         foreach ($phones as $index => $phone) { ?>
-                                            <?php if ($index === 0) { ?>
+                                            <?php if ($index === 0): ?>
                                                 <li class="phone-item">
                                                     <a href="tel:<?php echo esc_attr(get_phone_number($phone)); ?>"
                                                        class="phone-number">
@@ -59,22 +60,21 @@
                                                     </a>
                                                     <i class="fa fa-angle-down" aria-hidden="true"></i>
                                                     <ul class="sub-phone">
-                                                        <?php foreach ($phones as $key => $sub_phone) { ?>
-                                                            <?php if ($key !== 0) { ?>
-                                                                <li class="phone-item">
-                                                                    <a href="tel:<?php echo esc_attr(get_phone_number($phone)); ?>"
-                                                                       class="phone-number">
-                                                                        <i class="fa fa-phone" aria-hidden="true"></i>
-                                                                        <?php echo esc_html($phone); ?>
-                                                                    </a>
-                                                                </li>
-                                                            <?php } ?>
-                                                            <?php continue; ?>
-                                                        <?php } ?>
+                                            <?php endif; ?>
+                                                <?php if ($index !== 0): ?>
+                                                    <li class="phone-item">
+                                                        <a href="tel:<?php echo esc_attr(get_phone_number($phone)); ?>"
+                                                           class="phone-number">
+                                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                                            <?php echo esc_html($phone); ?>
+                                                        </a>
+                                                    </li>
+                                                <?php endif; ?>
+                                            <?php if ($index === $sizeof_phones): ?>
                                                     </ul>
                                                 </li>
-                                            <?php } ?>
-                                            <?php continue; ?>
+                                            <?php endif; ?>
+
                                         <?php } ?>
                                     </ul>
                                 </div>

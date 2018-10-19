@@ -528,7 +528,27 @@ if (!function_exists('get_woocommerce_categories'))
         {
             $args['parent'] = $parent;
         }
-        return get_categories($args);
+        $categories = get_categories($args);
+
+
+        foreach ($categories as $key=>$cat) {
+            $cat_term_name = 'product_cat_' . $cat->term_id;
+            $is_show = get_field('cat_show', $cat_term_name, true);
+            if (is_shop() && $is_show === false || $cat->slug == 'uncategorized') 
+            {
+                unset($categories[$key]);
+            }
+            else
+            {
+                $categories[$key]->order = intval(get_field("cat_order", $cat_term_name, true));
+            }
+        }
+
+        usort($categories, function ($current, $next) {
+            return $current->order < $next->order ? 1: 0;
+        });
+
+        return $categories;
     }
 }
 
@@ -573,8 +593,18 @@ if (!function_exists('the_woocommerce_categories_with_child'))
         {
             $output .= '<ul class="product-categories-list">';
 
-                $output .= sprintf('<li class="list-header %s"><span>%s</span></li>',
+            		if (sizeof($cat["child_terms"]) === 0)
+            		{
+            			$output .= sprintf('<li class="list-header %s"><a href="%s">%s</span></li>',
+                    'category-' . $cat['slug'], get_term_link($cat['id']), $cat["name"]);
+            		}
+            		else 
+            		{
+            			$output .= sprintf('<li class="list-header %s"><span>%s</span></li>',
                     'category-' . $cat['slug'], $cat["name"]);
+            		}
+
+                
 
                 foreach ($cat["child_terms"] as $child)
                 {
@@ -622,23 +652,24 @@ if (!function_exists('the_review_socials'))
         if (sizeof($socials) > 0)
         {
             $output = '<ul class="social-list">';
+                if ($socials[0] !== ""):
+                    foreach ($socials as $soc)
+                    {
+                        $social_icon = "fab fa-facebook";
+                        if (preg_match("/instagram/i", $soc))
+                            $social_icon = "fab fa-instagram";
+                        if (preg_match("/linkedin/i", $soc))
+                            $social_icon = "fab fa-linkedin";
+                        if (preg_match("/youtube/i", $soc))
+                            $social_icon = "fab fa-youtube";
+                        if (preg_match("/vk/i", $soc))
+                            $social_icon = "fab fa-vk";
 
-                foreach ($socials as $soc)
-                {
-                    $social_icon = "fab fa-facebook";
-                    if (preg_match("/instagram/i", $soc))
-                        $social_icon = "fab fa-instagram";
-                    if (preg_match("/linkedin/i", $soc))
-                        $social_icon = "fab fa-linkedin";
-                    if (preg_match("/youtube/i", $soc))
-                        $social_icon = "fab fa-youtube";
-                    if (preg_match("/vk/i", $soc))
-                        $social_icon = "fab fa-vk";
-
-                    $output .= sprintf('<li><a href="%s" target="_blank">
-                        <i class="%s"></i>
-                    </a></li>', $soc, $social_icon);
-                }
+                        $output .= sprintf('<li><a href="%s" target="_blank">
+                            <i class="%s"></i>
+                        </a></li>', $soc, $social_icon);
+                    }
+                endif;
 
             $output .= "</ul>";
             if ($echo === true)

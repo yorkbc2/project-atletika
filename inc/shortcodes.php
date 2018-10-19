@@ -509,3 +509,6 @@ if (!function_exists('reviews_slider_shortcode'))
 
     add_shortcode( 'reviews-slider', 'reviews_slider_shortcode' );
 }
+
+
+

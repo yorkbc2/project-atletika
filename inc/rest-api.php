@@ -149,10 +149,10 @@
 				}
 			}
 			foreach ($result['filters'] as $key=>$filter) {
-				$items = $result['filters'][$key]['items'];
+				$items = $filter['items'];
 				usort($items, function($a, $b) {
-					$_a = floatval(str_replace(',', '.', strtok($a['value'], '-')));
-					$_b = floatval(str_replace(',', '.', strtok($b['value'], '-')));
+					$_a = floatval(str_replace(',', '.', $a['value']));
+					$_b = floatval(str_replace(',', '.', $b['value']));
 					if ($_a == 0 && $_b == 0)
 					{
 						return strcmp($a['value'], $b['value']);
@@ -169,6 +169,36 @@
 			register_rest_route( 'brainworks', 'products', array(
 				'methods' => "GET",
 				'callback' => 'products_getter_rest'
+			));
+		});
+	}
+
+	if (!function_exists('test_route'))
+	{
+		function test_route(WP_REST_Request $req)
+		{
+			$arr = [
+				[ 'value' => '34-12 см' ],
+				['value' => '42,5 см'],
+				['value' => '12-15 см'],
+				['value' => '3,5 см']
+			];
+
+			usort($arr, function ($a,$b) {
+				$_a = floatval(str_replace(",", ".", $a['value']));
+				$_b = floatval(str_replace(",", ".", $b['value']));
+				var_dump([$_a, $_b]);
+				return $_a > $_b ? 1: 0;
+			});	
+
+			return $arr;
+		}
+
+		add_action('rest_api_init', function()
+		{
+			register_rest_route( 'brainworks', 'test', array(
+				'methods' => "GET",
+				'callback' => 'test_route'
 			));
 		});
 	}

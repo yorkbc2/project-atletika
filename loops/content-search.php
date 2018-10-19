@@ -5,8 +5,7 @@
  */
 ?>
 
-<div class="product_grid">
-<?php if (have_posts()): while (have_posts()): the_post(); ?>
+<?php if (have_posts()): echo '<div class="product_grid">'; while (have_posts()): the_post(); ?>
     <?php $product = wc_get_product(get_the_ID()); ?>
         <div class="product_item">
             <a href="<?php echo get_the_permalink(); ?>" class="product_item__link">
@@ -32,8 +31,9 @@
         </div>
 <?php endwhile;    echo '</div>';
 else: ?>
-    <div class="sp-xs-2 sp-sm-2 sp-md-2 sp-lg-2 sp-xl-2"></div>
-    <div class="alert alert-warning">
-        <i class="fa fa-exclamation-triangle"></i> <?php _e('Sorry, your search yielded no results.', 'brainworks'); ?>
+    <div>
+        <div>
+            <i class="fa fa-exclamation-triangle"></i> <?php _e('Sorry, your search yielded no results.', 'brainworks'); ?>
+        </div>
     </div>
 <?php endif; ?>
