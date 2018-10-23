@@ -6,7 +6,7 @@ $borderRadius: 4px;
 $shadow: 0 0 10px rgba(#000, .7);
 
 // BRAND
-$themeColorOne: #2c3e50; // header, menu, footer, title,
+$themeColorOne: #333; // header, menu, footer, title,
 $themeColorTwo: #1980ed; // menu active item, button, footer link hover,
 $themeColorThree: #3498db; // preHeader bg,
 $themeColorFour: #2980b9; //menu hover item, table border, preHeader font
@@ -99,8 +99,8 @@ $tableEvenFontColor: #fff;
 $textMutedColor: #aaa;
 
 // Icons
-$iconColor: $themeColorTwo;
-$iconColorActive: $themeColorTwo;
+$iconColor: #fff;
+$iconColorActive: #fff;
 $iconColorReversed: $themeColorTwo;
 
 // FORMS
