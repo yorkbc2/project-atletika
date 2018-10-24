@@ -595,7 +595,7 @@ if (!function_exists('the_woocommerce_categories_with_child'))
 
             		if (sizeof($cat["child_terms"]) === 0)
             		{
-            			$output .= sprintf('<li class="list-header %s"><a href="%s">%s</span></li>',
+            			$output .= sprintf('<li class="list-header %s"><a href="%s">%s</a></li>',
                     'category-' . $cat['slug'], get_term_link($cat['id']), $cat["name"]);
             		}
             		else 

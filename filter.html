@@ -1,0 +1,108 @@
+<style>
+	.filter_group_inside_sizes {
+		display: flex;
+		-webkit-flex-direction: row;
+		-moz-flex-direction: row;
+		-ms-flex-direction: row;
+		-o-flex-direction: row;
+		flex-direction: row;
+		-webkit-flex-wrap: wrap;
+		-moz-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		-o-flex-wrap: wrap;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+	}
+
+	.filter_group_inside_sizes input {
+		display: none;
+	}
+
+	.filter_checkbox {
+		position: relative;
+
+		width: 30px;
+		height: 30px;
+	}
+
+	.filter_checkbox > label {
+		position: absolute;	
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+	}
+
+	.filter_custom_checkbox label {
+		position: absolute;
+		background-color: red;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+	}
+
+	.filter_custom_checkbox input:checked + label {
+		background-color: blue;
+	}
+</style>
+
+<div class="filter_group">
+	<div class="filter_group_inside_sizes">
+		<div class="filter_item filter_checkbox">
+			<div class="filter_custom_checkbox">
+				<input id="c1" type="checkbox" />
+				<label for="c1"></label>
+			</div>
+			<label for="c1">34</label>
+		</div>
+		<div class="filter_item filter_checkbox">
+			<div class="filter_custom_checkbox">
+				<input id="c2" type="checkbox" />
+				<label for="c2"></label>
+			</div>
+			<label for="c2">44</label>
+		</div>
+		<div class="filter_item filter_checkbox">
+			<div class="filter_custom_checkbox">
+				<input id="c3" type="checkbox" />
+				<label for="c3"></label>
+			</div>
+			<label for="c3">13</label>
+		</div>
+		<div class="filter_item filter_checkbox">
+			<div class="filter_custom_checkbox">
+				<input id="c4" type="checkbox" />
+				<label for="c4"></label>
+			</div>
+			<label for="c4">12</label>
+		</div>
+		<div class="filter_item filter_checkbox">
+			<div class="filter_custom_checkbox">
+				<input id="c5" type="checkbox" />
+				<label for="c5"></label>
+			</div>
+			<label for="c5">15</label>
+		</div>
+		<div class="filter_item filter_checkbox">
+			<div class="filter_custom_checkbox">
+				<input id="c6" type="checkbox" />
+				<label for="c6"></label>
+			</div>
+			<label for="c6">34</label>
+		</div>
+		<div class="filter_item filter_checkbox">
+			<div class="filter_custom_checkbox">
+				<input id="c7" type="checkbox" />
+				<label for="c7"></label>
+			</div>
+			<label for="c7">34</label>
+		</div>
+		<div class="filter_item filter_checkbox">
+			<div class="filter_custom_checkbox">
+				<input id="c8" type="checkbox" />
+				<label for="c8"></label>
+			</div>
+			<label for="c8">34</label>
+		</div>
+	</div>
+</div>
