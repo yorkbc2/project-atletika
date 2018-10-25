@@ -3,11 +3,11 @@
 	ini_set('display_errors', 1);
 		if (!function_exists('products_get_query'))
 		{
-			function products_get_query($cat=0)
+			function products_get_query($cat=0, $posts_per_page = 300, $page = -1)
 			{
-				$query = new WP_Query([
+				$args = [
 					'post_type' => 'product',
-					'posts_per_page' => 300,
+					'posts_per_page' => $posts_per_page,
 					'post_status' => 'publish',
 					'orderby' => 'date',
 					'order' => 'DESC',
@@ -25,7 +25,12 @@
 				            'operator'      => 'NOT IN'
 				        )
 				    )
-				]);
+				];
+
+				if ($page != -1)
+					$args['paged'] = $page;
+
+				$query = new WP_Query($args);
 
 				if ($query->have_posts())
 					return $query;
@@ -52,7 +57,7 @@
 						if (!isset($result[$index]))
 						{
 							$result[$index] = [
-								'name' => $attr_label,
+								'name' => $label,
 								'slug' => $index,
 								'items' => []
 							];	
@@ -111,15 +116,20 @@
 
 	if (!function_exists('products_get_products'))
 	{
-		function products_get_products($cat=0)
+		function products_get_products($cat=0, $posts_per_page = 300, $page = -1)
 		{
 			$result = [
 				'products' => []
 			];
-			if ($query = products_get_query($cat))
+			if ($query = products_get_query($cat, $posts_per_page, $page))
 			{
+				$category = get_term($cat, 'product_cat');
+
+				$result['name'] = $category->name;
 				foreach ($query->posts as $index=>$post)
 				{
+
+					$result['total'] = $query->found_posts;
 
 					$product = wc_get_product($post);
 					$attributes = $product->get_attributes();
@@ -215,13 +225,25 @@
 	{
 		function route_products (WP_REST_Request $req) {
 			$cat = 0;
+			$limit = 300;
+			$page = -1;
 
 			if (isset($_GET['cat']))
 			{
 				$cat = $_GET['cat'];
 			}
 
-			return products_get_products($cat);
+			if (isset($_GET['limit']))
+			{
+				$limit = $_GET['limit'];
+			}
+
+			if (isset($_GET['page']))
+			{
+				$page = $_GET['page'];
+			}
+
+			return products_get_products($cat, $limit, $page);
 		}
 	}
 
