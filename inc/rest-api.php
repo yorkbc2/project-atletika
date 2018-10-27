@@ -1,6 +1,4 @@
 <?php 
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
 		if (!function_exists('products_get_query'))
 		{
 			function products_get_query($cat=0, $posts_per_page = 300, $page = -1)
@@ -47,6 +45,10 @@
 			{
 				foreach ($query->posts as $post) {
 					$product = wc_get_product($post);
+
+					if (!$product->is_in_stock())
+						continue;
+
 					$attributes = $product->get_attributes();
 
 					foreach ($attributes as $index=>$attribute)
@@ -128,10 +130,11 @@
 				$result['name'] = $category->name;
 				foreach ($query->posts as $index=>$post)
 				{
-
+					$product = wc_get_product($post);
+					if (!$product->get_stock_status())
+						continue;
 					$result['total'] = $query->found_posts;
 
-					$product = wc_get_product($post);
 					$attributes = $product->get_attributes();
 					$thumbnail = get_the_post_thumbnail_url($product->get_id(), 'medium');
 
