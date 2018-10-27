@@ -6,3 +6,4 @@ bower_components
 style.min.css
 brainworks.min.js
 /ignored
+assets/jsx/*
